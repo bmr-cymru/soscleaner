@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Soscleaner : A python application to clean sensitive and un-wanted data from an existing sosreport" />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Soscleaner</title>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>soscleaner by jduncan-rva</title>
   </head>
 
   <body>
+    <div id="container">
+      <div class="inner">
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/jduncan-rva/soscleaner">View on GitHub</a>
-
-          <h1 id="project_title">Soscleaner</h1>
-          <h2 id="project_tagline">A python application to clean sensitive and un-wanted data from an existing sosreport</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/jduncan-rva/soscleaner/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/jduncan-rva/soscleaner/tarball/master">Download this project as a tar.gz file</a>
-            </section>
+        <header>
+          <h1>soscleaner</h1>
+          <h2>A python application to clean sensitive and un-wanted data from an existing sosreport</h2>
         </header>
-    </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/jduncan-rva/soscleaner/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/jduncan-rva/soscleaner/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/jduncan-rva/soscleaner" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
 <a name="soscleaner" class="anchor" href="#soscleaner"><span class="octicon octicon-link"></span></a>SOSCleaner</h1>
 
 <h2>
@@ -44,7 +44,7 @@
 
 <ul>
 <li>Scrubs Binary Files - Binary Files cannot easily be visually scanned. They are left out of a 'cleaned' sosreport</li>
-<li>IP Address Obfuscation - IPv4 addresses throughout the sosreport are obfuscated consistently throughout all files.  For example, if 192.168.100.5 is obfuscated to 10.0.0.68, it will appear as 10.0.0.68 in all files within the sosreport. This means that troubleshooting can still take place.</li>
+<li>IP Address Obfuscation - IPv4 addresses in the sosreport are obfuscated consistently throughout all files.  For example, if 192.168.100.5 is obfuscated to 10.0.0.68, it will appear as 10.0.0.68 in all files within the sosreport. This means that troubleshooting can still take place.</li>
 <li>Hostname Obfuscation - Hostnames are obfuscated consistently troughout all files, much like the IP Address functionality. Based on the system's hostname, if the hostname for the system in question is an FQDN (Fully Qualified Domain Name), all hostnames on that domain are obfuscated. If the hostname is NOT an FQDN, then all examples of that hostname itself are obfuscated.</li>
 </ul><h2>
 <a name="project-information" class="anchor" href="#project-information"><span class="octicon octicon-link"></span></a>Project Information</h2>
@@ -56,19 +56,45 @@
 <li>Git Hub Pages - <a href="http://jduncan-rva.github.io/soscleaner/">http://jduncan-rva.github.io/soscleaner/</a>
 </li>
 <li>Mailing List - If this gets off the ground</li>
-</ul>
-      </section>
+</ul><h2>
+<a name="usage-basics" class="anchor" href="#usage-basics"><span class="octicon octicon-link"></span></a>Usage Basics</h2>
+
+<ul>
+<li>As a Python Module</li>
+</ul><pre><code>from SOSCleaner import SOSCleaner
+x = SOSCleaner('path/to/sosreport/directory')
+x.clean_report()
+</code></pre>
+
+<h2>
+<a name="how-do-i-see-the-obfuscated-data" class="anchor" href="#how-do-i-see-the-obfuscated-data"><span class="octicon octicon-link"></span></a>How Do I See The Obfuscated Data?</h2>
+
+<ul>
+<li>The data is available if accessing the Python class directly. It will soon be available optionally from the application. Within the application, it is stored within a key/value dictionary. It's format is </li>
+</ul><pre><code>{'obfuscated_ip':'original_ip',...}
+</code></pre>
+
+<ul>
+<li>To View The Data from a cleaned report:</li>
+</ul><pre><code>from SOSCleaner import SOSCleaner
+x = SOSCleaner('path/to/sosreport/directory')
+x.clean_report()
+
+x.ip_db
+{'192.168.1.4':'10.10.10.123', ...}
+
+x.hn_db
+{'server1.myserverfarm.com':'host0.example.com'}
+</code></pre>
+        </section>
+
+        <footer>
+          soscleaner is maintained by <a href="https://github.com/jduncan-rva">jduncan-rva</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
     </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Soscleaner maintained by <a href="https://github.com/jduncan-rva">jduncan-rva</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
   </body>
 </html>
